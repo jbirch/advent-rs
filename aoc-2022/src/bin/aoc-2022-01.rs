@@ -3,7 +3,7 @@ fn main() {
     let calories = part_one().expect("aoc-2022-01 exploded");
     println!("Fattest elf: {}", calories);
     let fatties = part_two().expect("aoc-2022-01 exploded");
-    println!("Fatties: {:?}", fatties.iter().sum::<i32>());
+    println!("Fatties: {}", fatties);
 
 }
 
@@ -17,16 +17,14 @@ fn part_one() -> Result<i32, Explode> {
     elves.iter().max().cloned().ok_or(Explode{})
 }
 
-fn part_two() -> Result<Vec<i32>, Explode> {
+fn part_two() -> Result<i32, Explode> {
     let mut elves: Vec<i32> = vec!();
     let splinput = INPUT.split("\n\n");
     for elf in splinput {
         elves.push(eat_the_whole_elf(elf).expect("Bad Elf"))
     }
 
-    elves.sort();
-    elves.reverse();
-    Ok(elves.as_slice().split_at(3).0.to_vec())
+    Ok(elves.iter().rev().take(3).sum())
 
 }
 

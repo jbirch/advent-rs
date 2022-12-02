@@ -50,6 +50,7 @@ Train of thought:
 * I have no idea how to have a `Vec<i32>`, and then reverse/take3. I can reverse in place and split a slice, but 
   accruing some `Take<Rev<...>>`, I'm not sure how to coalesce this into a type. `collect()` will give me references.
 * Don't forget to read questions carefully — part two wanted the _sum_ of the top three, not the top three.
+* But this makes the whole `Take<Rev<...>>` shenanigans silly, because I can just `sum` it.
 
 
 [doctests]: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
