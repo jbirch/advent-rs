@@ -8,23 +8,23 @@ fn main() {
 }
 
 fn part_one() -> Result<i32, Explode> {
-    let mut elves: Vec<i32> = vec!();
-    let splinput = INPUT.split("\n\n");
-    for elf in splinput {
-        elves.push(eat_the_whole_elf(elf).expect("Bad Elf"))
-    }
+    let totals: Vec<i32> = INPUT
+        .split("\n\n")
+        .map(|elf| eat_the_whole_elf(elf).expect("Bad Elf"))
+        .collect();
 
-    elves.iter().max().cloned().ok_or(Explode{})
+    totals.iter().max().cloned().ok_or(Explode{})
 }
 
 fn part_two() -> Result<i32, Explode> {
-    let mut elves: Vec<i32> = vec!();
-    let splinput = INPUT.split("\n\n");
-    for elf in splinput {
-        elves.push(eat_the_whole_elf(elf).expect("Bad Elf"))
-    }
+    let mut totals: Vec<i32> = INPUT
+        .split("\n\n")
+        .map(|elf| eat_the_whole_elf(elf).expect("Bad Elf"))
+        .collect();
 
-    Ok(elves.iter().rev().take(3).sum())
+    totals.sort();
+
+    Ok(totals.iter().rev().take(3).sum())
 
 }
 

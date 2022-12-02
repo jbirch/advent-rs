@@ -51,6 +51,8 @@ Train of thought:
   accruing some `Take<Rev<...>>`, I'm not sure how to coalesce this into a type. `collect()` will give me references.
 * Don't forget to read questions carefully — part two wanted the _sum_ of the top three, not the top three.
 * But this makes the whole `Take<Rev<...>>` shenanigans silly, because I can just `sum` it.
+* Took a stab at making it a little more functional, but it still is effectively quadratic. Would be faster to fold 
+  over splitting on `\n` and knowing what to do with the not-a-number line, but this is fine for now.
 
 
 [doctests]: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
