@@ -21,12 +21,17 @@ Things that cropped up that I worked around, and need to learn more of
 * Lifetimes of structs that contain a `&str`. Specifically in the context of having a `MyError<'a>` containing an 
   `&'a str` member.
 * Is it better to parameterise the world on `Box<dyn std::err:Error>`, or deal with concrete `MyError`?
+  * Does the guidance change here for certain modes of programming? IE, nostd/embedded/I otherwise do not have a heap?
 * Relatedly: How does the Rust ecosystem feel about sentinel errors? I'm drawn to them, but only because they're 
   about the best you can do in Golang. Is there a better way forward in Rust?
 * File input is probably worth doing for this task, and not just copy-pasting my input into a giant static constant.
 * Some things I want will return references, but I find myself choosing to implement concrete types. The moment I 
   return references, I need to care about lifetimes. But if I have a Result/Box/Option of a reference, I'd like to 
   turn what's inside into an owned copy. Or I annotate with `<'a>` wherever the compiler tells me.
+* In workspaces — at least in CLion — relative paths are from the root of the workspace, not the root of the crate 
+  within a workspace. This means I'm passing paths like `./aoc-2022/inputs/01` instead of `./inputs/01`, and I 
+  _feel_ has implications about the portability of crates within the workspace. But I think these problems probably 
+  always exist when using relative paths, and so... maybe it's a signal to not do that generally speaking.
 
 
 Things that tangentially cropped up that I am so far ignoring, but it would be neat to know
@@ -53,6 +58,35 @@ Train of thought:
 * But this makes the whole `Take<Rev<...>>` shenanigans silly, because I can just `sum` it.
 * Took a stab at making it a little more functional, but it still is effectively quadratic. Would be faster to fold 
   over splitting on `\n` and knowing what to do with the not-a-number line, but this is fine for now.
+
+Day 02
+------
+
+Things to take care of this time:
+
+* Let's try `Result`ing all the way up.
+* Let's try consuming input from a file as a stream.
+
+Train of thought:
+
+Day 03
+------
+
+Things to take care of this time:
+
+* Let's pull the file input stuff into some library we can use each time
+* Let's explore `thiserror` and `anyhow` for error handling improvements.
+
+Train of thought:
+
+Day 04
+------
+
+Things to take care of this time:
+
+* Let's see if we can share the streaming of the file across both parts of each question, so that we don't need to 
+  clone the whole input string. Do we work on references to the slurped string? Can we have multiple iterators over 
+  the same file descriptor? Are the ergonomics of this shit?
 
 
 [doctests]: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
