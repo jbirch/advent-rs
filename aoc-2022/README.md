@@ -16,6 +16,8 @@ Things that cropped up that I had to learn
 * Turn `Option<&...>` into `Option<...>` with `cloned()`.
 * The "expected" side of `assert_eq!` technically doesn't exist, but seems to conventionally be the right. You can 
   write a format string and args for any amount of args, if you wanted to make it dumb explicit.
+* It is better to use some collection as the type and then `collect()` into that, instead of trying to construct 
+  some sort of `Collection::from(...)`. Let the compiler do the work, and it reads nicer too.
 
 Things that cropped up that I worked around, and need to learn more of
 ----------------------------------------------------------------------
@@ -39,6 +41,10 @@ Things that cropped up that I worked around, and need to learn more of
 * If `main` can return a `Result`, it stands to reason that tests can too. This allows conveniences like `?`, but I 
   don't yet know if this is a solid pattern to adopt.
   * It certainly makes asserts at the end annoying, because there's always an explict `Ok(())` or something.
+* IntelliJ isn't great at dealing with functions that return `anyhow::Result<...>`. It doesn't know anything about 
+  the type, and can't seem to find any declaration to go to in the editor either? I wonder if something is set up 
+  incorrectly here.
+  * lmao just need to reimport if Cargo.toml changes. lame.
 
 
 Things that tangentially cropped up that I am so far ignoring, but it would be neat to know
@@ -96,6 +102,22 @@ Things to take care of this time:
 * Let's explore `thiserror` and `anyhow` for error handling improvements.
 
 Train of thought:
+
+* This thing is needlessly obtuse.
+* Each line, split in the middle, find the character that's in both.
+* Assign a number to each character, sum them up.
+* For part one, splitting in the middle is probably easy enough. The equivalent of set intersection I'm not sure how to
+  do in Rust though.
+  * I could take each part, sort, walk both at the same time until I find the thing that is the same
+  * But there's gotta be some sort of collections intersection thing, which I'll go look for instead.
+* for part two, mapping characters to numbers is either a dumb match statement, or some kind of ascii arithmetic. 
+  I'll probably look up the second.
+  * The ascii arithmetic is pretty lame, because of jumping between the underlying types. Feels like there should be a
+  better way.
+  * I guess just take things as u32 and do whatever :shrug:
+* I have legitimately just written `.to_owned().to_owned()` to make something compile and it feels bad.
+* Part two is fucking asinine.
+* I can't be assed so it's getting the "type-hole" treatment.
 
 Day 04
 ------

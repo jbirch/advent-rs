@@ -13,3 +13,4 @@ name = "aoc-2022-02"
 name = "aoc-2022-03"
 
 [dependencies]
+anyhow = "1.0.65"
