@@ -12,7 +12,7 @@ fn part_one(input: String) -> anyhow::Result<u32> {
     let mut total = 0;
     for line in input.split("\n") {
         let (left, right) = line.split_at(line.len() / 2);
-        total += priority(intersection(left, right)?)?;
+        total += priority(&intersection(left, right)?)?;
     }
 
     Ok(total)
@@ -40,7 +40,7 @@ fn part_two(input: String) -> anyhow::Result<u32> {
             anyhow::bail!("wrong number of intersecting items: {}", overlap.len())
         }
 
-        accum += priority(overlap.iter().nth(0).expect("somehow empty").to_owned().to_owned())?
+        accum += priority(overlap.iter().next().expect("somehow empty"))?
     }
 
     Ok(accum)
@@ -50,7 +50,7 @@ fn part_two(input: String) -> anyhow::Result<u32> {
 ///
 /// If there is not exactly one character the same between two equal-length
 /// strings, then explode.
-fn intersection(left: &str, right: &str) -> anyhow::Result<char> {
+fn intersection(left: &str, right : &str) -> anyhow::Result<char> {
     if left.len() != right.len() {
         anyhow::bail!("uneven split: {} {}", left.len(), right.len())
     }
@@ -63,7 +63,7 @@ fn intersection(left: &str, right: &str) -> anyhow::Result<char> {
         anyhow::bail!("wrong number of intersecting items: {}", overlap.len())
     }
 
-    Ok(overlap.iter().nth(0).expect("somehow empty").to_owned().to_owned())
+    Ok(**overlap.iter().next().expect("somehow empty"))
 }
 
 static VALID_UPPERCASE: RangeInclusive<u32> = 65..=90;
@@ -72,14 +72,13 @@ static VALID_LOWERCASE: RangeInclusive<u32> = 97..=122;
 /// Map a given ASCII character to a priority value.
 ///
 /// Priorities run from a..z,A..Z, for values 1..26,27..52.
-fn priority(letter: char) -> anyhow::Result<u32> {
-    let l = letter as u32;
+fn priority(letter: &char) -> anyhow::Result<u32> {
+    let l = *letter as u32;
     match letter {
         _ if VALID_UPPERCASE.contains(&l) => Ok(l - 38),
         _ if VALID_LOWERCASE.contains(&l) => Ok(l - 96),
         _ => anyhow::bail!("Out of bounds: {}", letter)
     }
-
 }
 
 
@@ -89,11 +88,11 @@ mod tests {
 
     #[test]
     fn test_priority() -> Result<(), Box<dyn std::error::Error>> {
-        assert_eq!(priority('A')?, 27);
-        assert_eq!(priority('Z')?, 52);
-        assert_eq!(priority('a')?, 1);
-        assert_eq!(priority('z')?, 26);
-        assert!(priority('`').is_err());
+        assert_eq!(priority(&'A')?, 27);
+        assert_eq!(priority(&'Z')?, 52);
+        assert_eq!(priority(&'a')?, 1);
+        assert_eq!(priority(&'z')?, 26);
+        assert!(priority(&'`').is_err());
         Ok(())
     }
 
