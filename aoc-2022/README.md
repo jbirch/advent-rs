@@ -14,6 +14,8 @@ Things that cropped up that I had to learn
 * Turn `Option` into `Result` with `ok_or(self, err: E)` or `ok_or_else(self, err: F)` (`FnOnce` and stuff) for 
   laziness.
 * Turn `Option<&...>` into `Option<...>` with `cloned()`.
+* The "expected" side of `assert_eq!` technically doesn't exist, but seems to conventionally be the right. You can 
+  write a format string and args for any amount of args, if you wanted to make it dumb explicit.
 
 Things that cropped up that I worked around, and need to learn more of
 ----------------------------------------------------------------------
@@ -32,6 +34,11 @@ Things that cropped up that I worked around, and need to learn more of
   within a workspace. This means I'm passing paths like `./aoc-2022/inputs/01` instead of `./inputs/01`, and I 
   _feel_ has implications about the portability of crates within the workspace. But I think these problems probably 
   always exist when using relative paths, and so... maybe it's a signal to not do that generally speaking.
+  * Indeed, using the same relative path in tests breaks. The current directory (IE: `std::env::current_dir()`) for 
+    the binary is `.../advent-rs`, and for the tests is `.../advent-rs/aoc-2022`.
+* If `main` can return a `Result`, it stands to reason that tests can too. This allows conveniences like `?`, but I 
+  don't yet know if this is a solid pattern to adopt.
+  * It certainly makes asserts at the end annoying, because there's always an explict `Ok(())` or something.
 
 
 Things that tangentially cropped up that I am so far ignoring, but it would be neat to know
@@ -68,6 +75,17 @@ Things to take care of this time:
 * Let's try consuming input from a file as a stream.
 
 Train of thought:
+
+* My brain immediately jumps to mapping letters to an enum of values, because I guess I like types.
+* But I think `match` also works on values, so maybe I can just match all the strings to values, and sum them?
+* Oh lordy, I'm using `Result` and `?` and friends to get at the values before I match them, but I could probably 
+  match the whole damn thing yeah? Maybe a refactor opportunity. Not sure what's clearer just yet.
+* I'm doing two `match`, but really you could do it all at once.
+* My test was correct, but the full answer was "high". My guess was 12313. My guess is that I done fucked up some 
+  mappings.
+  * Lol yes I was scoring the other dude, not me. 11478 is better. But that's too low!
+* Fuck it, join them together.
+* Lol I got their play and my play backwards. 12156 is better.
 
 Day 03
 ------
