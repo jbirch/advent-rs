@@ -12,5 +12,8 @@ name = "aoc-2022-02"
 [[bin]]
 name = "aoc-2022-03"
 
+[[bin]]
+name = "aoc-2022-04"
+
 [dependencies]
 anyhow = "1.0.65"
