@@ -128,6 +128,69 @@ Things to take care of this time:
   clone the whole input string. Do we work on references to the slurped string? Can we have multiple iterators over 
   the same file descriptor? Are the ergonomics of this shit?
 
+Day 05
+------
+
+Day 06
+------
+
+Day 07
+------
+
+Day 08
+------
+
+Day 09
+------
+
+Day 10
+------
+
+Day 11
+------
+
+Day 12
+------
+
+Day 13
+------
+
+Day 14
+------
+
+Day 15
+------
+
+Day 16
+------
+
+Day 17
+------
+
+Day 18
+------
+
+Day 19
+------
+
+Day 20
+------
+
+Day 21
+------
+
+Day 22
+------
+
+Day 23
+------
+
+Day 24
+------
+
+Day 25
+------
+
 
 [doctests]: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
 [error-1]: https://github.com/dtolnay/thiserror
