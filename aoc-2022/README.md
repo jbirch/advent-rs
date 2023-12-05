@@ -40,7 +40,7 @@ Things that cropped up that I worked around, and need to learn more of
     the binary is `.../advent-rs`, and for the tests is `.../advent-rs/aoc-2022`.
 * If `main` can return a `Result`, it stands to reason that tests can too. This allows conveniences like `?`, but I 
   don't yet know if this is a solid pattern to adopt.
-  * It certainly makes asserts at the end annoying, because there's always an explict `Ok(())` or something.
+  * It certainly makes asserts at the end annoying, because there's always an explicit `Ok(())` or something.
 * IntelliJ isn't great at dealing with functions that return `anyhow::Result<...>`. It doesn't know anything about 
   the type, and can't seem to find any declaration to go to in the editor either? I wonder if something is set up 
   incorrectly here.

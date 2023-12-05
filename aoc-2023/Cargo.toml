@@ -1,0 +1,13 @@
+[package]
+name = "aoc-2023"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "aoc-2023-00"
+
+[[bin]]
+name = "aoc-2023-01"
+
+[dependencies]
+anyhow = "1.0.75"
