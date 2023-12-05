@@ -12,6 +12,8 @@ Things that cropped up that I worked around, and need to learn more of
 ----------------------------------------------------------------------
 
 [//]: #day-00 (TODO: I don't know how current_dir works in RustRover)
+  But I did some dodgy shit to """fix""" it!
+
 [//]: #day-01 (TODO: I need to upskill on generics, associated types, and traits)
 [//]: #day-01 (TODO: I need to understand when to prefer &str over String and the implications of such)
 [//]: #day-01 (TODO: I don't know the implications of Try, From, TryInto, and TryFrom)
