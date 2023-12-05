@@ -95,7 +95,7 @@ Day 01
     `std::error::Error` isn't implemented by `anyhow::Error`. This makes [some amount of sense][anyhow_implementing],
     but I don't understand the syntax suggested in that comment. It seems to come down to "anyhow errors aren't 
     core errors, and so you can go from core errors to anyhow errors, but maybe not vice versa." There are 
-    suggestions to use `thiserror` when creating adhoc errors for this case. I was hoping there'd be a nicer way.
+    suggestions to use `thiserror` when creating adhoc errors for this case. I was hoping there would be a nicer way.
   * Bounding on `Into<anyhow::Error>` doesn't work either, bringing back all the old issues about sized and whatnot. 
     Even re-adding these bounds (`Into<anyhow::Error> + Send + Sync + 'static`) runs back into the "residual" 
     problems from before.

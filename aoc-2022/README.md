@@ -87,7 +87,7 @@ Train of thought:
 * Oh lordy, I'm using `Result` and `?` and friends to get at the values before I match them, but I could probably 
   match the whole damn thing yeah? Maybe a refactor opportunity. Not sure what's clearer just yet.
 * I'm doing two `match`, but really you could do it all at once.
-* My test was correct, but the full answer was "high". My guess was 12313. My guess is that I done fucked up some 
+* My test was correct, but the full answer was "high". My guess was 12313. My guess is that I have done fucked up some 
   mappings.
   * Lol yes I was scoring the other dude, not me. 11478 is better. But that's too low!
 * Fuck it, join them together.
@@ -117,7 +117,7 @@ Train of thought:
   * I guess just take things as u32 and do whatever :shrug:
 * I have legitimately just written `.to_owned().to_owned()` to make something compile and it feels bad.
 * Part two is fucking asinine.
-* I can't be assed so it's getting the "type-hole" treatment.
+* I can't be assed, so it's getting the "type-hole" treatment.
 
 Day 04
 ------
