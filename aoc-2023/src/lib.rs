@@ -66,7 +66,7 @@ pub fn ensure_we_look_like_rustrover_testtime() {
 /// ```
 /// # aoc_2023::ensure_we_look_like_rustrover_runtime();
 /// let whole_file = aoc_2023::read_input("00").expect("boom");
-/// println!("{}",{whole_file})
+/// println!("{whole_file}",)
 /// ```
 ///
 /// # Errors
@@ -121,7 +121,7 @@ pub fn read_input_lines(f: &str) -> anyhow::Result<Lines<BufReader<File>>> {
 /// ```
 /// # aoc_2023::ensure_we_look_like_rustrover_testtime();
 /// let whole_file = aoc_2023::read_test_input("00").expect("boom");
-/// println!("{}",{whole_file})
+/// println!("{whole_file}")
 /// ```
 ///
 /// # Errors
