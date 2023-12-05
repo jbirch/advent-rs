@@ -11,12 +11,19 @@ Things that cropped up that I had to learn
 Things that cropped up that I worked around, and need to learn more of
 ----------------------------------------------------------------------
 
-[//]: #day-00 (TODO: I don't know how current_dir works in RustRover)
-  But I did some dodgy shit to """fix""" it!
 
-[//]: #day-01 (TODO: I need to upskill on generics, associated types, and traits)
+[//]: #day-00 (TODO: Learn more how current_dir works in RustRover)
+* RustRover's current_dir is fucked, but I did a dodgy to make it mostly work in most places.
+
+[//]: #day-01 (TODO: Upskill on generics, associated types, and traits)
+* I have to reread the TRPL on generics and stuff.
+
 [//]: #day-01 (TODO: I need to understand when to prefer &str over String and the implications of such)
-[//]: #day-01 (TODO: I don't know the implications of Try, From, TryInto, and TryFrom)
+* `&str` vs `String` isn't natural for me yet, although `AsRef<str>` is super convenient for not caring.
+
+[//]: #day-01 (TODO: Learn the implications of Try, From, TryInto, and TryFrom)
+* `Try` and `From` are opposites of each other, and their "Try" versions can return Results. I couldn't use these 
+  effectively as trait bounds yet though, or to implement something.
 
 Things that tangentially cropped up that I am so far ignoring, but it would be neat to know
 -------------------------------------------------------------------------------------------

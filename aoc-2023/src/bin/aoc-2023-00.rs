@@ -5,10 +5,9 @@ fn main() -> anyhow::Result<()> {
     Ok(day_00(lines)?)
 }
 
-fn day_00<I, T, E>(lines: I) -> anyhow::Result<(), E>
+fn day_00<I, S: AsRef<str>, E>(lines: I) -> anyhow::Result<(), E>
 where
-    I: IntoIterator<Item = Result<T, E>>,
-    T: AsRef<str>,
+    I: IntoIterator<Item = Result<S, E>>,
 {
     lines.into_iter().try_for_each(|line| {
         let _ = line?.as_ref();
