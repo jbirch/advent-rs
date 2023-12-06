@@ -30,7 +30,7 @@ fn part_two(input: String) -> anyhow::Result<u32> {
 
         let left_set: HashSet<char> = chunk.get(0).expect("bad").chars().collect();
         let middle_set: HashSet<char> = chunk.get(1).expect("bad").chars().collect();
-        let right_set : HashSet<char> = chunk.get(2).expect("bad").chars().collect();
+        let right_set: HashSet<char> = chunk.get(2).expect("bad").chars().collect();
 
         let left_intersection: HashSet<char> = left_set.intersection(&middle_set).cloned().collect();
         let overlap: HashSet<&char> = left_intersection.intersection(&right_set).collect();
@@ -50,7 +50,7 @@ fn part_two(input: String) -> anyhow::Result<u32> {
 ///
 /// If there is not exactly one character the same between two equal-length
 /// strings, then explode.
-fn intersection(left: &str, right : &str) -> anyhow::Result<char> {
+fn intersection(left: &str, right: &str) -> anyhow::Result<char> {
     if left.len() != right.len() {
         anyhow::bail!("uneven split: {} {}", left.len(), right.len())
     }

@@ -38,7 +38,7 @@ fn score_a_round_one(entry: &str) -> Result<i32, Box<dyn std::error::Error>> {
         "C X" => Ok(6 + 1), //       Scissors             Rock,     1            Rock
         "C Y" => Ok(0 + 2), //       Scissors             Paper,    2            Paper
         "C Z" => Ok(3 + 3), //       Scissors             Scissors, 3            Scissors
-        _ => Err(Box::from(MyError{}))
+        _ => Err(Box::from(MyError {}))
     }
 }
 
@@ -65,7 +65,7 @@ fn score_a_round_two(entry: &str) -> Result<i32, Box<dyn std::error::Error>> {
         "C X" => Ok(0 + 2), //    Lose,            Paper                  Scissors
         "C Y" => Ok(3 + 3), //    Draw,            Scissors               Scissors
         "C Z" => Ok(6 + 1), //    Win,             Rock                   Scissors
-        _ => Err(Box::from(MyError{}))
+        _ => Err(Box::from(MyError {}))
     }
 }
 

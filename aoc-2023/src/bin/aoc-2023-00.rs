@@ -1,13 +1,17 @@
+use std::error::Error;
+
 const DAY: &str = "00";
 
 fn main() -> anyhow::Result<()> {
     let lines = aoc_2023::read_input_lines(DAY)?;
-    Ok(day_00(lines)?)
+    day_00(lines)
 }
 
-fn day_00<I, S: AsRef<str>, E>(lines: I) -> anyhow::Result<(), E>
-where
-    I: IntoIterator<Item = Result<S, E>>,
+fn day_00<I, S, E>(lines: I) -> anyhow::Result<()>
+    where
+        I: IntoIterator<Item=Result<S, E>>,
+        S: AsRef<str>,
+        E: Error + Send + Sync + 'static,
 {
     lines.into_iter().try_for_each(|line| {
         let _ = line?.as_ref();
@@ -17,8 +21,6 @@ where
 
 #[cfg(test)]
 mod tests {
-    use anyhow::anyhow;
-
     use super::*;
 
     #[test]
@@ -29,7 +31,7 @@ mod tests {
 
     #[test]
     fn test_boom() {
-        let input = vec![Ok("one"), Err(anyhow!("boom"))];
+        let input = vec![Ok("one"), Err(aoc_2023::AoCError {})];
         assert!(day_00(input).is_err());
     }
 }

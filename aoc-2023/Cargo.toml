@@ -11,3 +11,5 @@ name = "aoc-2023-01"
 
 [dependencies]
 anyhow = "1.0.75"
+thiserror = "1.0.50"
+regex = "1.10.2"

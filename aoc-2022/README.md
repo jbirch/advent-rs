@@ -6,46 +6,45 @@ Things that cropped up that I had to learn
 
 * You [can't do workspaces of workspaces yet][ws-of-ws].
 * It's possible to have no default executable for a Cargo project — Just don't have a `main.rs`.
-* It's not possible to `#[derive(Error)]` natively, but there are [some][error-1] [crates][error-2] [for][error-3] 
+* It's not possible to `#[derive(Error)]` natively, but there are [some][error-1] [crates][error-2] [for][error-3]
   [it][error-4] (in order of popularity).
-* `Result::expect` needs a `self` that is `fmt::Debug`, because it will include the representation of `self` in the 
+* `Result::expect` needs a `self` that is `fmt::Debug`, because it will include the representation of `self` in the
   resultant panic. So at the very least, sentinel errors require `#[derive(Debug)]`.
 * There doesn't seem to be much use in `#[derive(Default)]` for a struct with no members, but you can do it!
-* Turn `Option` into `Result` with `ok_or(self, err: E)` or `ok_or_else(self, err: F)` (`FnOnce` and stuff) for 
+* Turn `Option` into `Result` with `ok_or(self, err: E)` or `ok_or_else(self, err: F)` (`FnOnce` and stuff) for
   laziness.
 * Turn `Option<&...>` into `Option<...>` with `cloned()`.
-* The "expected" side of `assert_eq!` technically doesn't exist, but seems to conventionally be the right. You can 
+* The "expected" side of `assert_eq!` technically doesn't exist, but seems to conventionally be the right. You can
   write a format string and args for any amount of args, if you wanted to make it dumb explicit.
-* It is better to use some collection as the type and then `collect()` into that, instead of trying to construct 
+* It is better to use some collection as the type and then `collect()` into that, instead of trying to construct
   some sort of `Collection::from(...)`. Let the compiler do the work, and it reads nicer too.
 
 Things that cropped up that I worked around, and need to learn more of
 ----------------------------------------------------------------------
 
-* Lifetimes of structs that contain a `&str`. Specifically in the context of having a `MyError<'a>` containing an 
+* Lifetimes of structs that contain a `&str`. Specifically in the context of having a `MyError<'a>` containing an
   `&'a str` member.
 * Is it better to parameterise the world on `Box<dyn std::err:Error>`, or deal with concrete `MyError`?
-  * Does the guidance change here for certain modes of programming? IE, nostd/embedded/I otherwise do not have a heap?
-* Relatedly: How does the Rust ecosystem feel about sentinel errors? I'm drawn to them, but only because they're 
+    * Does the guidance change here for certain modes of programming? IE, nostd/embedded/I otherwise do not have a heap?
+* Relatedly: How does the Rust ecosystem feel about sentinel errors? I'm drawn to them, but only because they're
   about the best you can do in Golang. Is there a better way forward in Rust?
 * File input is probably worth doing for this task, and not just copy-pasting my input into a giant static constant.
-* Some things I want will return references, but I find myself choosing to implement concrete types. The moment I 
-  return references, I need to care about lifetimes. But if I have a Result/Box/Option of a reference, I'd like to 
+* Some things I want will return references, but I find myself choosing to implement concrete types. The moment I
+  return references, I need to care about lifetimes. But if I have a Result/Box/Option of a reference, I'd like to
   turn what's inside into an owned copy. Or I annotate with `<'a>` wherever the compiler tells me.
-* In workspaces — at least in CLion — relative paths are from the root of the workspace, not the root of the crate 
-  within a workspace. This means I'm passing paths like `./aoc-2022/inputs/01` instead of `./inputs/01`, and I 
-  _feel_ has implications about the portability of crates within the workspace. But I think these problems probably 
+* In workspaces — at least in CLion — relative paths are from the root of the workspace, not the root of the crate
+  within a workspace. This means I'm passing paths like `./aoc-2022/inputs/01` instead of `./inputs/01`, and I
+  _feel_ has implications about the portability of crates within the workspace. But I think these problems probably
   always exist when using relative paths, and so... maybe it's a signal to not do that generally speaking.
-  * Indeed, using the same relative path in tests breaks. The current directory (IE: `std::env::current_dir()`) for 
-    the binary is `.../advent-rs`, and for the tests is `.../advent-rs/aoc-2022`.
-* If `main` can return a `Result`, it stands to reason that tests can too. This allows conveniences like `?`, but I 
+    * Indeed, using the same relative path in tests breaks. The current directory (IE: `std::env::current_dir()`) for
+      the binary is `.../advent-rs`, and for the tests is `.../advent-rs/aoc-2022`.
+* If `main` can return a `Result`, it stands to reason that tests can too. This allows conveniences like `?`, but I
   don't yet know if this is a solid pattern to adopt.
-  * It certainly makes asserts at the end annoying, because there's always an explicit `Ok(())` or something.
-* IntelliJ isn't great at dealing with functions that return `anyhow::Result<...>`. It doesn't know anything about 
-  the type, and can't seem to find any declaration to go to in the editor either? I wonder if something is set up 
+    * It certainly makes asserts at the end annoying, because there's always an explicit `Ok(())` or something.
+* IntelliJ isn't great at dealing with functions that return `anyhow::Result<...>`. It doesn't know anything about
+  the type, and can't seem to find any declaration to go to in the editor either? I wonder if something is set up
   incorrectly here.
-  * lmao just need to reimport if Cargo.toml changes. lame.
-
+    * lmao just need to reimport if Cargo.toml changes. lame.
 
 Things that tangentially cropped up that I am so far ignoring, but it would be neat to know
 -------------------------------------------------------------------------------------------
@@ -57,19 +56,19 @@ Day 01
 
 Train of thought:
 
-* If I can take this flattened list and turn it into a list of lists, the inner lists can be reduced into a single 
+* If I can take this flattened list and turn it into a list of lists, the inner lists can be reduced into a single
   number, and then we can take the maximum.
-* Though part of my mind wonders about parallelism of each elf for the luls, it's likely that accruing on a single 
-  traverse is faster than slurping the whole thing and then summing. It also doesn't fucking matter, because there's 
+* Though part of my mind wonders about parallelism of each elf for the luls, it's likely that accruing on a single
+  traverse is faster than slurping the whole thing and then summing. It also doesn't fucking matter, because there's
   only a few thousand lines.
 * So let's go with a dumbass solution first instead of some amazing functional masterpiece.
 * I'll need to process the input line by line (Is there some kind of `split` I can use on `String`/`&str`?).
 * I'll need to accrue into a growing vector, because I won't know up front how many elves there are. All hail The Heap.
-* I have no idea how to have a `Vec<i32>`, and then reverse/take3. I can reverse in place and split a slice, but 
+* I have no idea how to have a `Vec<i32>`, and then reverse/take3. I can reverse in place and split a slice, but
   accruing some `Take<Rev<...>>`, I'm not sure how to coalesce this into a type. `collect()` will give me references.
 * Don't forget to read questions carefully — part two wanted the _sum_ of the top three, not the top three.
 * But this makes the whole `Take<Rev<...>>` shenanigans silly, because I can just `sum` it.
-* Took a stab at making it a little more functional, but it still is effectively quadratic. Would be faster to fold 
+* Took a stab at making it a little more functional, but it still is effectively quadratic. Would be faster to fold
   over splitting on `\n` and knowing what to do with the not-a-number line, but this is fine for now.
 
 Day 02
@@ -84,12 +83,12 @@ Train of thought:
 
 * My brain immediately jumps to mapping letters to an enum of values, because I guess I like types.
 * But I think `match` also works on values, so maybe I can just match all the strings to values, and sum them?
-* Oh lordy, I'm using `Result` and `?` and friends to get at the values before I match them, but I could probably 
+* Oh lordy, I'm using `Result` and `?` and friends to get at the values before I match them, but I could probably
   match the whole damn thing yeah? Maybe a refactor opportunity. Not sure what's clearer just yet.
 * I'm doing two `match`, but really you could do it all at once.
-* My test was correct, but the full answer was "high". My guess was 12313. My guess is that I have done fucked up some 
+* My test was correct, but the full answer was "high". My guess was 12313. My guess is that I have done fucked up some
   mappings.
-  * Lol yes I was scoring the other dude, not me. 11478 is better. But that's too low!
+    * Lol yes I was scoring the other dude, not me. 11478 is better. But that's too low!
 * Fuck it, join them together.
 * Lol I got their play and my play backwards. 12156 is better.
 
@@ -108,13 +107,13 @@ Train of thought:
 * Assign a number to each character, sum them up.
 * For part one, splitting in the middle is probably easy enough. The equivalent of set intersection I'm not sure how to
   do in Rust though.
-  * I could take each part, sort, walk both at the same time until I find the thing that is the same
-  * But there's gotta be some sort of collections intersection thing, which I'll go look for instead.
-* for part two, mapping characters to numbers is either a dumb match statement, or some kind of ascii arithmetic. 
+    * I could take each part, sort, walk both at the same time until I find the thing that is the same
+    * But there's gotta be some sort of collections intersection thing, which I'll go look for instead.
+* for part two, mapping characters to numbers is either a dumb match statement, or some kind of ascii arithmetic.
   I'll probably look up the second.
-  * The ascii arithmetic is pretty lame, because of jumping between the underlying types. Feels like there should be a
-  better way.
-  * I guess just take things as u32 and do whatever :shrug:
+    * The ascii arithmetic is pretty lame, because of jumping between the underlying types. Feels like there should be a
+      better way.
+    * I guess just take things as u32 and do whatever :shrug:
 * I have legitimately just written `.to_owned().to_owned()` to make something compile and it feels bad.
 * Part two is fucking asinine.
 * I can't be assed, so it's getting the "type-hole" treatment.
@@ -124,8 +123,8 @@ Day 04
 
 Things to take care of this time:
 
-* Let's see if we can share the streaming of the file across both parts of each question, so that we don't need to 
-  clone the whole input string. Do we work on references to the slurped string? Can we have multiple iterators over 
+* Let's see if we can share the streaming of the file across both parts of each question, so that we don't need to
+  clone the whole input string. Do we work on references to the slurped string? Can we have multiple iterators over
   the same file descriptor? Are the ergonomics of this shit?
 
 Day 05
@@ -193,8 +192,13 @@ Day 25
 
 
 [doctests]: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
+
 [error-1]: https://github.com/dtolnay/thiserror
+
 [error-2]: https://github.com/JelteF/derive_more
+
 [error-3]: https://github.com/rushmorem/derive-error
+
 [error-4]: https://gitlab.com/torkleyy/err-derive
+
 [ws-of-ws]: https://github.com/rust-lang/cargo/issues/5042

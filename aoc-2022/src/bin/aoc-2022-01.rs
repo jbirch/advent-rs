@@ -4,7 +4,6 @@ fn main() {
     println!("Fattest elf: {}", calories);
     let fatties = part_two(input).expect("aoc-2022-01 exploded");
     println!("Fatties: {}", fatties);
-
 }
 
 fn part_one(input: String) -> Result<i32, Explode> {
@@ -13,7 +12,7 @@ fn part_one(input: String) -> Result<i32, Explode> {
         .map(|elf| eat_the_whole_elf(elf).expect("Bad Elf"))
         .collect();
 
-    totals.iter().max().cloned().ok_or(Explode{})
+    totals.iter().max().cloned().ok_or(Explode {})
 }
 
 fn part_two(input: String) -> Result<i32, Explode> {
@@ -25,11 +24,10 @@ fn part_two(input: String) -> Result<i32, Explode> {
     totals.sort();
 
     Ok(totals.iter().rev().take(3).sum())
-
 }
 
 fn eat_the_whole_elf(elf: &str) -> Result<i32, Explode> {
-    let mut calories= 0;
+    let mut calories = 0;
     for entry in elf.split("\n") {
         calories += entry.parse::<i32>().expect("Not a number")
     }

@@ -1,4 +1,5 @@
 use std::env;
+use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::{BufRead, BufReader, Lines};
 use std::path::PathBuf;
@@ -50,6 +51,15 @@ pub fn ensure_we_look_like_rustrover_testtime() {
     env::set_current_dir(subdir.to_str().expect("not great")).expect("really not great");
 }
 
+#[derive(thiserror::Error, Debug)]
+pub struct AoCError {}
+
+impl Display for AoCError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Oh no.")
+    }
+}
+
 /// Return, as a giant string, the content of the day's input file.
 ///
 /// This is done relative to the base project directory, as naively expected by rustrover's "run the
@@ -57,7 +67,8 @@ pub fn ensure_we_look_like_rustrover_testtime() {
 ///
 /// # Arguments
 ///
-/// * `f`: Name of the file to load - conventionally the advent day.
+/// * `f`: Name of the file to load - conventionally the advent day, but might be something like
+/// "01-2" in the case of days that have two parts.
 ///
 /// returns: `Result<String, Error>`
 ///
@@ -72,8 +83,8 @@ pub fn ensure_we_look_like_rustrover_testtime() {
 /// # Errors
 ///
 /// Whatever `std::fs::read_to_string` does. Be wary of the current directory.
-pub fn read_input(f: &str) -> anyhow::Result<String> {
-    Ok(std::fs::read_to_string(format!("./aoc-2023/inputs/{f}"))?)
+pub fn read_input(f: &str) -> Result<String, std::io::Error> {
+    std::fs::read_to_string(format!("./aoc-2023/inputs/{f}"))
 }
 
 /// Return, as a bunch of buffered lines, the content of the day's input file.
@@ -83,7 +94,8 @@ pub fn read_input(f: &str) -> anyhow::Result<String> {
 ///
 /// # Arguments
 ///
-/// * `f`: Name of the file to load - conventionally the advent day.
+/// * `f`: Name of the file to load - conventionally the advent day, but might be something like
+/// "01-2" in the case of days that have two parts.
 ///
 /// returns: `Result<Lines<BufReader<File>>, Error>`
 ///
@@ -100,7 +112,7 @@ pub fn read_input(f: &str) -> anyhow::Result<String> {
 /// # Errors
 ///
 /// Whatever `File::open` does. Be wary of the current directory.
-pub fn read_input_lines(f: &str) -> anyhow::Result<Lines<BufReader<File>>> {
+pub fn read_input_lines(f: &str) -> Result<Lines<BufReader<File>>, std::io::Error> {
     let file = File::open(format!("./aoc-2023/inputs/{f}"))?;
     Ok(BufReader::new(file).lines())
 }
@@ -112,7 +124,8 @@ pub fn read_input_lines(f: &str) -> anyhow::Result<Lines<BufReader<File>>> {
 ///
 /// # Arguments
 ///
-/// * `f`: Name of the file to load - conventionally the advent day.
+/// * `f`: Name of the file to load - conventionally the advent day, but might be something like
+/// "01-2" in the case of days that have two parts.
 ///
 /// returns: `Result<String, Error>`
 ///
@@ -127,8 +140,8 @@ pub fn read_input_lines(f: &str) -> anyhow::Result<Lines<BufReader<File>>> {
 /// # Errors
 ///
 /// Whatever `std::fs::read_to_string` does. Be wary of the current directory.
-pub fn read_test_input(f: &str) -> anyhow::Result<String> {
-    Ok(std::fs::read_to_string(format!("./inputs/{f}_test"))?)
+pub fn read_test_input(f: &str) -> Result<String, std::io::Error> {
+    std::fs::read_to_string(format!("./inputs/{f}_test"))
 }
 
 /// Return, as a bunch of buffered lines, the content of the day's test file.
@@ -138,7 +151,8 @@ pub fn read_test_input(f: &str) -> anyhow::Result<String> {
 ///
 /// # Arguments
 ///
-/// * `f`: Name of the file to load - conventionally the advent day.
+/// * `f`: Name of the file to load - conventionally the advent day, but might be something like
+/// "01-2" in the case of days that have two parts.
 ///
 /// returns: `Result<Lines<BufReader<File>>, Error>`
 ///
@@ -155,7 +169,7 @@ pub fn read_test_input(f: &str) -> anyhow::Result<String> {
 /// # Errors
 ///
 /// Whatever `File::open` does. Be wary of the current directory.
-pub fn read_test_input_lines(f: &str) -> anyhow::Result<Lines<BufReader<File>>> {
+pub fn read_test_input_lines(f: &str) -> Result<Lines<BufReader<File>>, std::io::Error> {
     let file = File::open(format!("./inputs/{f}_test"))?;
     Ok(BufReader::new(file).lines())
 }
