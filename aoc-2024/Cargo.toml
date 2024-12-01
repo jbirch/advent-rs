@@ -6,6 +6,9 @@ edition = "2021"
 [[bin]]
 name = "aoc-2024-00"
 
+[[bin]]
+name = "aoc-2024-01"
+
 [dependencies]
 anyhow = "1.0.93"
 thiserror = "2.0.3"
