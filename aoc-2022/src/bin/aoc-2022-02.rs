@@ -2,17 +2,17 @@ use std::fmt::{Display, Formatter};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input = std::fs::read_to_string("./aoc-2022/inputs/02")?;
-    println!("One: {:?}", part_one(input.clone())?);
-    println!("Two: {:?}", part_two(input)?);
+    println!("One: {:?}", part_one(&input)?);
+    println!("Two: {:?}", part_two(&input)?);
     Ok(())
 }
 
-fn part_one(input: String) -> Result<i32, Box<dyn std::error::Error>> {
-    input.split("\n").map(|round| score_a_round_one(round)).sum()
+fn part_one(input: &str) -> Result<i32, Box<dyn std::error::Error>> {
+    input.split('\n').map(|round| score_a_round_one(round)).sum()
 }
 
-fn part_two(input: String) -> Result<i32, Box<dyn std::error::Error>> {
-    input.split("\n").map(|round| score_a_round_two(round)).sum()
+fn part_two(input: &str) -> Result<i32, Box<dyn std::error::Error>> {
+    input.split('\n').map(|round| score_a_round_two(round)).sum()
 }
 
 /// Given a round in the format:
@@ -89,19 +89,19 @@ mod tests {
 
     #[test]
     fn test_part_one() -> Result<(), Box<dyn std::error::Error>> {
-        // Current directory isn't the root of the workspace in tests in CLion for reasons I
+        // The current directory isn't the root of the workspace in tests in CLion for reasons I
         // don't know.
         let test_input = std::fs::read_to_string("./inputs/02_test")?;
-        assert_eq!(part_one(test_input)?, 15);
+        assert_eq!(part_one(&*test_input)?, 15);
         Ok(())
     }
 
     #[test]
     fn test_part_two() -> Result<(), Box<dyn std::error::Error>> {
-        // Current directory isn't the root of the workspace in tests in CLion for reasons I
+        // The current directory isn't the root of the workspace in tests in CLion for reasons I
         // don't know.
         let test_input = std::fs::read_to_string("./inputs/02_test")?;
-        assert_eq!(part_one(test_input)?, 12);
+        assert_eq!(part_one(&*test_input)?, 12);
         Ok(())
     }
 }

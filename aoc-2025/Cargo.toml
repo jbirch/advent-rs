@@ -1,0 +1,11 @@
+[package]
+name = "aoc-2025"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "aoc-2025-00"
+
+[dependencies]
+anyhow = "1.0.100"
+thiserror = "2.0.17"

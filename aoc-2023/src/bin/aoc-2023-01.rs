@@ -13,10 +13,10 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn day_01<I, S, E>(lines: I) -> anyhow::Result<u32>
-    where
-        I: IntoIterator<Item=Result<S, E>>,
-        S: AsRef<str>,
-        E: Error + Send + Sync + 'static,
+where
+    I: IntoIterator<Item=Result<S, E>>,
+    S: AsRef<str>,
+    E: Error + Send + Sync + 'static,
 {
     let mut r = 0;
     for line in lines {
@@ -28,7 +28,7 @@ fn day_01<I, S, E>(lines: I) -> anyhow::Result<u32>
             _ => {
                 anyhow::bail!("Line without a value: {}", l.as_ref());
             }
-        };
+        }
     }
     Ok(r)
 }
@@ -42,10 +42,10 @@ fn extract_number(s: &str) -> Option<(u32, u32)> {
 }
 
 fn day_01_pt2<I, S, E>(lines: I) -> anyhow::Result<u32>
-    where
-        I: IntoIterator<Item=Result<S, E>>,
-        S: AsRef<str>,
-        E: Error + Send + Sync + 'static,
+where
+    I: IntoIterator<Item=Result<S, E>>,
+    S: AsRef<str>,
+    E: Error + Send + Sync + 'static,
 {
     let mut r = 0;
     for line in lines {
@@ -57,7 +57,7 @@ fn day_01_pt2<I, S, E>(lines: I) -> anyhow::Result<u32>
             _ => {
                 anyhow::bail!("Line without a value: {}", l.as_ref());
             }
-        };
+        }
     }
     Ok(r)
 }

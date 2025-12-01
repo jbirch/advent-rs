@@ -3,36 +3,36 @@ use std::ops::RangeInclusive;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input = std::fs::read_to_string("./aoc-2022/inputs/03")?;
-    println!("One: {:?}", part_one(input.clone())?);
-    println!("Two: {:?}", part_two(input)?);
+    println!("One: {:?}", part_one(&input)?);
+    println!("Two: {:?}", part_two(&input)?);
     Ok(())
 }
 
-fn part_one(input: String) -> anyhow::Result<u32> {
+fn part_one(input: &str) -> anyhow::Result<u32> {
     let mut total = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let (left, right) = line.split_at(line.len() / 2);
-        total += priority(&intersection(left, right)?)?;
+        total += priority(intersection(left, right)?)?;
     }
 
     Ok(total)
 }
 
 /// This will be inelegant with copy pasta because I ceebs
-fn part_two(input: String) -> anyhow::Result<u32> {
+fn part_two(input: &str) -> anyhow::Result<u32> {
     let mut accum: u32 = 0;
-    let lines: Vec<&str> = input.split("\n").collect();
+    let lines: Vec<&str> = input.split('\n').collect();
     let chunks = lines.chunks(3);
     for chunk in chunks {
         if chunk.len() != 3 {
             anyhow::bail!("Each chunk needs to be of length three")
         }
 
-        let left_set: HashSet<char> = chunk.get(0).expect("bad").chars().collect();
+        let left_set: HashSet<char> = chunk.first().expect("bad").chars().collect();
         let middle_set: HashSet<char> = chunk.get(1).expect("bad").chars().collect();
         let right_set: HashSet<char> = chunk.get(2).expect("bad").chars().collect();
 
-        let left_intersection: HashSet<char> = left_set.intersection(&middle_set).cloned().collect();
+        let left_intersection: HashSet<char> = left_set.intersection(&middle_set).copied().collect();
         let overlap: HashSet<&char> = left_intersection.intersection(&right_set).collect();
 
 
@@ -40,7 +40,7 @@ fn part_two(input: String) -> anyhow::Result<u32> {
             anyhow::bail!("wrong number of intersecting items: {}", overlap.len())
         }
 
-        accum += priority(overlap.iter().next().expect("somehow empty"))?
+        accum += priority(**overlap.iter().next().expect("somehow empty"))?;
     }
 
     Ok(accum)
@@ -72,12 +72,12 @@ static VALID_LOWERCASE: RangeInclusive<u32> = 97..=122;
 /// Map a given ASCII character to a priority value.
 ///
 /// Priorities run from a..z,A..Z, for values 1..26,27..52.
-fn priority(letter: &char) -> anyhow::Result<u32> {
-    let l = *letter as u32;
+fn priority(letter: char) -> anyhow::Result<u32> {
+    let l = letter as u32;
     match letter {
         _ if VALID_UPPERCASE.contains(&l) => Ok(l - 38),
         _ if VALID_LOWERCASE.contains(&l) => Ok(l - 96),
-        _ => anyhow::bail!("Out of bounds: {}", letter)
+        _ => anyhow::bail!("Out of bounds: {letter}")
     }
 }
 
@@ -88,11 +88,11 @@ mod tests {
 
     #[test]
     fn test_priority() -> Result<(), Box<dyn std::error::Error>> {
-        assert_eq!(priority(&'A')?, 27);
-        assert_eq!(priority(&'Z')?, 52);
-        assert_eq!(priority(&'a')?, 1);
-        assert_eq!(priority(&'z')?, 26);
-        assert!(priority(&'`').is_err());
+        assert_eq!(priority('A')?, 27);
+        assert_eq!(priority('Z')?, 52);
+        assert_eq!(priority('a')?, 1);
+        assert_eq!(priority('z')?, 26);
+        assert!(priority('`').is_err());
         Ok(())
     }
 
@@ -107,19 +107,19 @@ mod tests {
 
     #[test]
     fn test_part_one() -> Result<(), Box<dyn std::error::Error>> {
-        // Current directory isn't the root of the workspace in tests in CLion for reasons I
+        // The current directory isn't the root of the workspace in tests in CLion for reasons I
         // don't know.
         let test_input = std::fs::read_to_string("./inputs/03_test")?;
-        assert_eq!(part_one(test_input)?, 157);
+        assert_eq!(part_one(&*test_input)?, 157);
         Ok(())
     }
 
     #[test]
     fn test_part_two() -> Result<(), Box<dyn std::error::Error>> {
-        // Current directory isn't the root of the workspace in tests in CLion for reasons I
+        // The current directory isn't the root of the workspace in tests in CLion for reasons I
         // don't know.
         let test_input = std::fs::read_to_string("./inputs/03_test")?;
-        assert_eq!(part_two(test_input)?, 70);
+        assert_eq!(part_two(&*test_input)?, 70);
         Ok(())
     }
 }

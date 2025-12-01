@@ -30,7 +30,7 @@ where
         // Why they gotta be separated by three spaces huh
         if split_line.len() != 4 {
             anyhow::bail!("{split_line:?} was not what we expected");
-        };
+        }
 
         left.push(
             split_line[0]
@@ -74,7 +74,7 @@ where
         // Why they gotta be separated by three spaces huh
         if split_line.len() != 4 {
             anyhow::bail!("{split_line:?} was not what we expected");
-        };
+        }
 
         left.push(
             split_line[0]
@@ -91,7 +91,7 @@ where
             None => {
                 right_count.insert(r, 1);
             }
-        };
+        }
     }
 
     let mut accum = 0;
