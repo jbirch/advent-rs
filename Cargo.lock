@@ -8,7 +8,7 @@ version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b2969dcb958b36655471fc61f7e416fa76033bdd4bfed0678d8fee1e2d07a1f0"
 dependencies = [
- "memchr",
+    "memchr",
 ]
 
 [[package]]
@@ -21,32 +21,32 @@ checksum = "a23eb6b1614318a8071c9b2521f36b424b2c83db5eb3a0fead4a6c0809af6e61"
 name = "aoc-2022"
 version = "0.1.0"
 dependencies = [
- "anyhow",
+    "anyhow",
 ]
 
 [[package]]
 name = "aoc-2023"
 version = "0.1.0"
 dependencies = [
- "anyhow",
- "regex",
- "thiserror 1.0.50",
+    "anyhow",
+    "regex",
+    "thiserror 1.0.50",
 ]
 
 [[package]]
 name = "aoc-2024"
 version = "0.1.0"
 dependencies = [
- "anyhow",
- "thiserror 2.0.17",
+    "anyhow",
+    "thiserror 2.0.17",
 ]
 
 [[package]]
 name = "aoc-2025"
 version = "0.1.0"
 dependencies = [
- "anyhow",
- "thiserror 2.0.17",
+    "anyhow",
+    "thiserror 2.0.17",
 ]
 
 [[package]]
@@ -61,7 +61,7 @@ version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "37d3544b3f2748c54e147655edb5025752e2303145b5aefb3c3ea2c78b973bb0"
 dependencies = [
- "unicode-ident",
+    "unicode-ident",
 ]
 
 [[package]]
@@ -70,7 +70,7 @@ version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5b9d34b8991d19d98081b46eacdd8eb58c6f2b201139f7c5f643cc155a633af"
 dependencies = [
- "proc-macro2",
+    "proc-macro2",
 ]
 
 [[package]]
@@ -79,10 +79,10 @@ version = "1.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "380b951a9c5e80ddfd6136919eef32310721aa4aacd4889a8d39124b026ab343"
 dependencies = [
- "aho-corasick",
- "memchr",
- "regex-automata",
- "regex-syntax",
+    "aho-corasick",
+    "memchr",
+    "regex-automata",
+    "regex-syntax",
 ]
 
 [[package]]
@@ -91,9 +91,9 @@ version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5f804c7828047e88b2d32e2d7fe5a105da8ee3264f01902f796c8e067dc2483f"
 dependencies = [
- "aho-corasick",
- "memchr",
- "regex-syntax",
+    "aho-corasick",
+    "memchr",
+    "regex-syntax",
 ]
 
 [[package]]
@@ -108,9 +108,9 @@ version = "2.0.90"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "919d3b74a5dd0ccd15aeb8f93e7006bd9e14c295087c9896a110f490752bcf31"
 dependencies = [
- "proc-macro2",
- "quote",
- "unicode-ident",
+    "proc-macro2",
+    "quote",
+    "unicode-ident",
 ]
 
 [[package]]
@@ -119,7 +119,7 @@ version = "1.0.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f9a7210f5c9a7156bb50aa36aed4c95afb51df0df00713949448cf9e97d382d2"
 dependencies = [
- "thiserror-impl 1.0.50",
+    "thiserror-impl 1.0.50",
 ]
 
 [[package]]
@@ -128,7 +128,7 @@ version = "2.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f63587ca0f12b72a0600bcba1d40081f830876000bb46dd2337a3051618f4fc8"
 dependencies = [
- "thiserror-impl 2.0.17",
+    "thiserror-impl 2.0.17",
 ]
 
 [[package]]
@@ -137,9 +137,9 @@ version = "1.0.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "266b2e40bc00e5a6c09c3584011e08b06f123c00362c92b975ba9843aaaa14b8"
 dependencies = [
- "proc-macro2",
- "quote",
- "syn",
+    "proc-macro2",
+    "quote",
+    "syn",
 ]
 
 [[package]]
@@ -148,9 +148,9 @@ version = "2.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ff15c8ecd7de3849db632e14d18d2571fa09dfc5ed93479bc4485c7a517c913"
 dependencies = [
- "proc-macro2",
- "quote",
- "syn",
+    "proc-macro2",
+    "quote",
+    "syn",
 ]
 
 [[package]]
