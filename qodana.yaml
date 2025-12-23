@@ -253,3 +253,7 @@ include:
   - name: RsEnumVariantNaming
   - name: RsEnumNaming
   - name: RsConstNaming
+exclude:
+  - name: IncorrectFormatting
+    paths:
+      - Cargo.lock

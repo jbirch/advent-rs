@@ -13,10 +13,9 @@ where
     S: AsRef<str>,
     E: Error + Send + Sync + 'static,
 {
-    let _ = lines.into_iter().try_for_each(|line| {
+    for line in lines {
         let _ = line?.as_ref();
-        Ok(())
-    });
+    }
 
     Ok(())
 }
