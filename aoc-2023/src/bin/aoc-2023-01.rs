@@ -14,7 +14,7 @@ fn main() -> anyhow::Result<()> {
 
 fn day_01<I, S, E>(lines: I) -> anyhow::Result<u32>
 where
-    I: IntoIterator<Item=Result<S, E>>,
+    I: IntoIterator<Item = Result<S, E>>,
     S: AsRef<str>,
     E: Error + Send + Sync + 'static,
 {
@@ -43,7 +43,7 @@ fn extract_number(s: &str) -> Option<(u32, u32)> {
 
 fn day_01_pt2<I, S, E>(lines: I) -> anyhow::Result<u32>
 where
-    I: IntoIterator<Item=Result<S, E>>,
+    I: IntoIterator<Item = Result<S, E>>,
     S: AsRef<str>,
     E: Error + Send + Sync + 'static,
 {

@@ -11,10 +11,10 @@ use std::path::PathBuf;
 /// understanding why rustrover gives a different current working directory to binaries, tests,
 /// and doctests in multi-module projects.
 ///
-/// Ideally it would be private, but it needs to be public to be used in doctests to make them
+/// Ideally, it would be private, but it needs to be public to be used in doctests to make them
 /// run, even if the invocation is hidden, as well as tests.
 ///
-/// It'll stop walking once it gets to the root of "../aoc-2024/".
+/// It'll stop walking once it gets to the root of "../aoc-2025/".
 ///
 /// # Panics
 ///
@@ -55,7 +55,7 @@ impl Display for AoCError {
 /// # Examples
 ///
 /// ```
-/// let lines = aoc_2024::read_input_lines("00").expect("boom");
+/// let lines = aoc_2025::read_input_lines("00").expect("boom");
 /// for l in lines.into_iter().flatten() {
 ///     println!("{l}");
 /// }
@@ -65,16 +65,16 @@ impl Display for AoCError {
 ///
 /// Whatever `File::open` does. Be wary of the current directory.
 pub fn read_input_lines(f: &str) -> Result<Lines<BufReader<File>>, std::io::Error> {
-    let file = File::open(format!("./aoc-2024/inputs/{f}"))?;
+    let file = File::open(format!("./aoc-2025/inputs/{f}"))?;
     Ok(BufReader::new(file).lines())
 }
 
 /// Return an iterator over the lines of the test string.
 ///
-/// Frankly, it's annoying to write this function, what is essentially a one-liner that's more
-/// clear in context than this function could ever be. Perhaps I'll delete it one day after using
-/// it a bit. It exists only as a comparable test analogue to `read_input_lines`, pretending that
-/// each line might fail to be read, even though it never will.
+/// Frankly, it's annoying to write this function, which is essentially a one-liner that's clearer
+/// in context than this function could ever be. Perhaps I'll delete it one day after using it a
+/// bit. It exists only as a comparable test analogue to `read_input_lines`, pretending that each
+/// line might fail to be read, even though it never will.
 ///
 /// # Arguments
 ///
@@ -85,7 +85,7 @@ pub fn read_input_lines(f: &str) -> Result<Lines<BufReader<File>>, std::io::Erro
 /// # Examples
 ///
 /// ```
-/// let lines = aoc_2024::read_test_input_lines("A 1\nB 2");
+/// let lines = aoc_2025::read_test_input_lines("A 1\nB 2");
 /// for l in lines.into_iter().flatten() {
 ///     println!("{l}");
 /// }

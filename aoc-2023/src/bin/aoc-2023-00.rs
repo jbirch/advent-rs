@@ -8,10 +8,10 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn day_00<I, S, E>(lines: I) -> anyhow::Result<()>
-    where
-        I: IntoIterator<Item=Result<S, E>>,
-        S: AsRef<str>,
-        E: Error + Send + Sync + 'static,
+where
+    I: IntoIterator<Item = Result<S, E>>,
+    S: AsRef<str>,
+    E: Error + Send + Sync + 'static,
 {
     lines.into_iter().try_for_each(|line| {
         let _ = line?.as_ref();
