@@ -13,10 +13,12 @@ where
     S: AsRef<str>,
     E: Error + Send + Sync + 'static,
 {
-    lines.into_iter().try_for_each(|line| {
+    let _ = lines.into_iter().try_for_each(|line| {
         let _ = line?.as_ref();
         Ok(())
-    })
+    });
+
+    Ok(())
 }
 
 #[cfg(test)]
