@@ -32,8 +32,8 @@ fn part_two(input: &str) -> anyhow::Result<u32> {
         let middle_set: HashSet<char> = chunk.get(1).expect("bad").chars().collect();
         let right_set: HashSet<char> = chunk.get(2).expect("bad").chars().collect();
 
-        let left_intersection: HashSet<char> = left_set.intersection(&middle_set).copied().collect();
-        let overlap: HashSet<&char> = left_intersection.intersection(&right_set).collect();
+        let left_intersect: HashSet<char> = left_set.intersection(&middle_set).copied().collect();
+        let overlap: HashSet<&char> = left_intersect.intersection(&right_set).collect();
 
 
         if overlap.len() != 1 {

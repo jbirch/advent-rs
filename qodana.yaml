@@ -253,6 +253,17 @@ include:
   - name: RsEnumVariantNaming
   - name: RsEnumNaming
   - name: RsConstNaming
+  - name: LongLine
+  - name: TodoComment
+  - name: MarkdownUnresolvedLinkLabel
+  - name: MarkdownUnresolvedHeaderReference
+  - name: MarkdownUnresolvedFileReference
+  - name: MarkdownNoTableBorders
+  - name: MarkdownOutdatedTableOfContents
+  - name: MarkdownLinkDestinationWithSpaces
+  - name: MarkdownIncorrectTableFormatting
+  - name: MarkdownIncorrectlyNumberedListItem
+  - name: CyclomaticComplexityInspection
 exclude:
   - name: IncorrectFormatting
     paths:
